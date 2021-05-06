@@ -1,6 +1,8 @@
 # terminal-ui
 
-A way to build TUI apps with a layout system and API that's similar to SwiftUI.
+A way to build [TUI](https://en.wikipedia.org/wiki/Text-based_user_interface) apps with a layout system and API that's similar to SwiftUI.
+
+We reimplemented parts of the SwiftUI layout system in the Swift Talk series [SwiftUI Layout Explained](https://talk.objc.io/collections/swiftui-layout-explained). This tries to stay as close to that as possible.
 
 Similar Projects:
 

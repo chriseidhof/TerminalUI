@@ -24,6 +24,9 @@ var rootView: some BuiltinView {
             .padding()
     ], alignment: .bottom)
     .overlay(Text("[x]"), alignment: .topTrailing)
+    .overlay(GeometryReader(alignment: .bottom) { size in
+        Text("\(size.width)⨉\(size.height)")
+    })
     .border()
 //        .frame(maxWidth: .max, maxHeight: .max)
 //        .border()
