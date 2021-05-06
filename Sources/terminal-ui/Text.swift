@@ -23,6 +23,5 @@ struct Text: BuiltinView {
             c.write(line)
             c.origin.y += 1
         }
-    }
-    
+    }    
 }
