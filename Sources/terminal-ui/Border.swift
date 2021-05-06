@@ -25,10 +25,10 @@ struct Border<Content: BuiltinView>: BuiltinView {
     var style = BorderStyle()
     let width: Int = 1
     
-    func size(for proposed: Size) -> Size {
+    func size(for proposed: ProposedSize) -> Size {
         var childProposal = proposed
-        childProposal.width -= width*2
-        childProposal.height -= width*2
+        childProposal.width? -= width*2
+        childProposal.height? -= width*2
         var result = content.size(for: childProposal)
         result.width += width*2
         result.height += width*2

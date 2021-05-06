@@ -4,12 +4,6 @@ func winsz_handler(sig: Int32) {
     render()
 }
 
-struct Size {
-    var width: Int
-    var height: Int
-    
-    static let zero = Size(width: 0, height: 0)
-}
 
 func enableRawMode(file: Int32) -> termios {
     var raw: termios = .init()
@@ -25,8 +19,9 @@ var rootView: some BuiltinView {
     Text("Hello")
         .padding()
         .border(style: .ascii)
-        .padding(2)
+        .frame(maxWidth: .max, maxHeight: .max)
         .border()
+        .padding(3)
 }
 
 struct RenderingContext {
@@ -49,8 +44,9 @@ func render() {
     let size: Size = Size(width: Int(w.ws_col), height: Int(w.ws_row))
     clearScreen()
     move(to: Point(x: 1, y: 1))
-    let implicit = rootView.frame(width: size.width, height: size.height)
-    let s = implicit.size(for: size)
+    let implicit = rootView
+        .frame(width: size.width, height: size.height, alignment: .trailing)
+    let s = implicit.size(for: ProposedSize(size))
     implicit.render(context: RenderingContext(), size: s)
     
 }
@@ -87,7 +83,6 @@ func main() {
         print(c)
         c = getchar()
     }
-    print("Done")
 }
 
 main()

@@ -16,8 +16,8 @@ struct Padding<Content: BuiltinView>: BuiltinView {
         return childProposal
     }
     
-    func size(for proposed: Size) -> Size {
-        var result = content.size(for: childSize(for: proposed))
+    func size(for proposed: ProposedSize) -> Size {
+        var result = content.size(for: ProposedSize(childSize(for: proposed.orDefault)))
         result.width += amount*2
         result.height += amount*2
         return result

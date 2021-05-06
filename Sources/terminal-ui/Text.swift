@@ -9,7 +9,8 @@ struct Text: BuiltinView {
         string.split(omittingEmptySubsequences: false, whereSeparator: { $0.isNewline })
     }
     
-    func size(for proposed: Size) -> Size {
+    func size(for proposed: ProposedSize) -> Size {
+        // todo actually fit ourselves?
         let lines = self.lines
         let width = lines.map { $0.count }.max() ?? 0
         let height = lines.count

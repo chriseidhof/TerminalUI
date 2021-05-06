@@ -21,14 +21,15 @@ struct HorizontalAlignment {
     static let trailing = Self(alignmentID: HTrailing.self, builtin: true)
 }
 
+// We don't allow custom alignments for now
 extension HorizontalAlignment {
-    init(alignmentID: AlignmentID.Type) {
+    fileprivate init(alignmentID: AlignmentID.Type) {
         self.init(alignmentID: alignmentID, builtin: false)
     }
 }
 
 extension VerticalAlignment {
-    init(alignmentID: AlignmentID.Type) {
+    fileprivate init(alignmentID: AlignmentID.Type) {
         self.init(alignmentID: alignmentID, builtin: false)
     }
 }
@@ -82,22 +83,22 @@ extension Alignment {
     }
 }
 
-//struct CustomHAlignmentGuide<Content: View>: View_, BuiltinView {
+//struct CustomHAlignmentGuide<Content: View>: BuiltinView, BuiltinView {
 //    var content: Content
-//    var alignment: HorizontalAlignment_
-//    var computeValue: (CGSize) -> CGFloat
+//    var alignment: HorizontalAlignment
+//    var computeValue: (Size) -> Width
 //
 //    var layoutPriority: Double {
 //        content._layoutPriority
 //    }
 //
-//    func render(context: RenderingContext, size: CGSize) {
+//    func render(context: RenderingContext, size: Size) {
 //        content._render(context: context, size: size)
 //    }
-//    func size(proposed: ProposedSize) -> CGSize {
+//    func size(proposed: ProposedSize) -> Size {
 //        content._size(proposed: proposed)
 //    }
-//    func customAlignment(for alignment: HorizontalAlignment_, in size: CGSize) -> CGFloat? {
+//    func customAlignment(for alignment: HorizontalAlignment, in size: Size) -> Width? {
 //        if alignment.alignmentID == self.alignment.alignmentID {
 //            return computeValue(size)
 //        }
@@ -105,13 +106,13 @@ extension Alignment {
 //    }
 //    var swiftUI: some View {
 //        content.swiftUI.alignmentGuide(alignment.swiftUI, computeValue: {
-//            computeValue(CGSize(width: $0.width, height: $0.height))
+//            computeValue(Size(width: $0.width, height: $0.height))
 //        })
 //    }
 //}
 //
-//extension View_ {
-//    func alignmentGuide(for alignment: HorizontalAlignment_, computeValue: @escaping (CGSize) -> CGFloat) -> some View_ {
+//extension BuiltinView {
+//    func alignmentGuide(for alignment: HorizontalAlignment, computeValue: @escaping (Size) -> Width) -> some BuiltinView {
 //        CustomHAlignmentGuide(content: self, alignment: alignment, computeValue: computeValue)
 //    }
 //}

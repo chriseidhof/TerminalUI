@@ -5,27 +5,47 @@
 //  Created by Chris Eidhof on 06.05.21.
 //
 
-struct Frame<Content: BuiltinView>: BuiltinView {
-    var width: Int?
-    var height: Int?
-    var content: Content
-    
-    func size(for proposed: Size) -> Size {
-        var child = proposed
-        child.width = width ?? proposed.width
-        child.height = height ?? proposed.height
-        var result = content.size(for: child)
-        result.width = width ?? result.width
-        result.height = height ?? result.height
-        return result
+struct FixedFrame<Content: BuiltinView>: BuiltinView {
+    var width: Width?
+    var height: Width?
+    var alignment: Alignment
+    var content: Content    
+
+    func size(for proposed: ProposedSize) -> Size {
+        let childSize = content.size(for: ProposedSize(width: width ?? proposed.width, height: height ?? proposed.height))
+        return Size(width: width ?? childSize.width, height: height ?? childSize.height)
     }
     
     func render(context: RenderingContext, size: Size) {
-        // center align
-        let childSize = content.size(for: size)
+        let childSize = content.size(for: ProposedSize(size))
+        let t = translation(for: content, in: size, childSize: childSize, alignment: alignment)
         var c = context
-        c.translateBy(Point(x: (size.width-childSize.width)/2,
-                                  y: (size.height-childSize.height)/2))
+        c.translateBy(t)
         content.render(context: c, size: childSize)
+    }
+}
+
+extension BuiltinView {
+    func translation<V: BuiltinView>(for childView: V, in parentSize: Size, childSize: Size, alignment: Alignment) -> Point {
+        let parentPoint = alignment.point(for: parentSize)
+        let childPoint = alignment.point(for: childSize)
+//        if let customX  = childView.customAlignment(for: alignment.horizontal, in: childSize) {
+//            childPoint.x = customX
+//        }
+//        // TODO vertical axis
+        return Point(x: parentPoint.x-childPoint.x, y: parentPoint.y-childPoint.y)
+    }
+    
+    func translation<V: BuiltinView>(for sibling: V, in size: Size, siblingSize: Size, alignment: Alignment) -> Point {
+        let selfPoint = alignment.point(for: size)
+//        if let customX  = self.customAlignment(for: alignment.horizontal, in: size) {
+//            selfPoint.x = customX
+//        }
+        let childPoint = alignment.point(for: siblingSize)
+//        if let customX  = sibling.customAlignment(for: alignment.horizontal, in: siblingSize) {
+//            childPoint.x = customX
+//        }
+        // TODO vertical axis
+        return Point(x: selfPoint.x-childPoint.x, y: selfPoint.y-childPoint.y)
     }
 }
