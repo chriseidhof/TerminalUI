@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct BorderStyle {
     var topLeft = "┌"
     var topRight = "┐"
@@ -20,19 +19,12 @@ struct BorderStyle {
     static let ascii = BorderStyle(topLeft: "+", topRight: "+", horizontal: "-", vertical: "|", bottomLeft: "+", bottomRight: "+")
 }
 
-struct Border<Content: BuiltinView>: BuiltinView {
-    var content: Content
+struct Border: BuiltinView {
     var style = BorderStyle()
-    let width: Int = 1
+    let width = 1
     
     func size(for proposed: ProposedSize) -> Size {
-        var childProposal = proposed
-        childProposal.width? -= width*2
-        childProposal.height? -= width*2
-        var result = content.size(for: childProposal)
-        result.width += width*2
-        result.height += width*2
-        return result
+        return proposed.orDefault
     }
     
     func render(context: RenderingContext, size: Size) {
@@ -47,13 +39,5 @@ struct Border<Content: BuiltinView>: BuiltinView {
         c.origin.y += 1
         let bottomLine = style.bottomLeft + String(repeating: style.horizontal, count: size.width-2) + style.bottomRight
         c.write(bottomLine)
-
-        c = context
-        c.origin.x += width
-        c.origin.y += width
-        var s = size
-        s.width -= width*2
-        s.height -= width*2
-        content.render(context: c, size: s)
     }
 }

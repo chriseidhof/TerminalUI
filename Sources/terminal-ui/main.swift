@@ -23,6 +23,7 @@ var rootView: some BuiltinView {
             .border()
             .padding()
     ], alignment: .bottom)
+    .overlay(Text("[x]"), alignment: .topTrailing)
     .border()
 //        .frame(maxWidth: .max, maxHeight: .max)
 //        .border()

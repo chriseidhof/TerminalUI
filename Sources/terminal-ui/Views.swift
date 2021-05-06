@@ -46,7 +46,7 @@ extension BuiltinView {
     }
     
     func border(style: BorderStyle = .init()) -> some BuiltinView {
-        Border(content: self, style: style)
+        self.padding(1).background(Border(style: style))
     }
     
     func frame(width: Int? = nil, height: Int? = nil, alignment: Alignment = .center) -> some BuiltinView {
