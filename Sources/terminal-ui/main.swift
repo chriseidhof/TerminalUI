@@ -16,12 +16,17 @@ func enableRawMode(file: Int32) -> termios {
 
 
 var rootView: some BuiltinView {
-    Text("Hello")
-        .padding()
-        .border(style: .ascii)
-        .frame(maxWidth: .max, maxHeight: .max)
-        .border()
-        .padding(3)
+    HStack(children: [
+        Text("Hello").padding().border().padding(),
+        Text("Testing")
+            .frame(maxWidth: .max)
+            .border()
+            .padding()
+    ], alignment: .bottom)
+    .border()
+//        .frame(maxWidth: .max, maxHeight: .max)
+//        .border()
+//        .padding(3)
 }
 
 struct RenderingContext {
