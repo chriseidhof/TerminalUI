@@ -21,12 +21,26 @@ func enableRawMode(file: Int32) -> termios {
 }
 
 
-var rootView: some Builtin {
+var rootView: some BuiltinView {
     Text("Hello")
         .padding()
         .border(style: .ascii)
         .padding(2)
         .border()
+}
+
+struct RenderingContext {
+    var origin: Point = .zero
+    
+    mutating func translateBy(_ point: Point) {
+        origin.x += point.x
+        origin.y += point.y
+    }
+    
+    func write<S: StringProtocol>(_ s: S) {
+        move(to: origin)
+        _write(String(s))
+    }
 }
 
 func render() {
@@ -37,8 +51,7 @@ func render() {
     move(to: Point(x: 1, y: 1))
     let implicit = rootView.frame(width: size.width, height: size.height)
     let s = implicit.size(for: size)
-    implicit.render(origin: .zero, size: s)
-//    print(s)
+    implicit.render(context: RenderingContext(), size: s)
     
 }
 
@@ -57,7 +70,7 @@ func move(to: Point) {
     _write("\u{1b}[\(to.y+1);\(to.x+1)H")
 }
 
-func _write(_ str: String, fd: Int32 = STDOUT_FILENO) {
+fileprivate func _write(_ str: String, fd: Int32 = STDOUT_FILENO) {
     _ = str.withCString { str in
         write(fd, str, strlen(str))
     }
@@ -65,10 +78,10 @@ func _write(_ str: String, fd: Int32 = STDOUT_FILENO) {
 }
 
 func main() {
-    let previous = enableRawMode(file: STDOUT_FILENO)
+    _ = enableRawMode(file: STDOUT_FILENO)
     render()
     signal(SIGWINCH, winsz_handler)
-    let previousStdIn = enableRawMode(file: STDIN_FILENO)
+    _ = enableRawMode(file: STDIN_FILENO)
     var c = getchar()
     while true {
         print(c)
