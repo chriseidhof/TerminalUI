@@ -24,8 +24,8 @@ func enableRawMode(file: Int32) -> termios {
 var rootView: some Builtin {
     Text("Hello")
         .padding()
-        .border()
-        .padding()
+        .border(style: .ascii)
+        .padding(2)
         .border()
 }
 

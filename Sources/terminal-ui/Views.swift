@@ -40,8 +40,21 @@ struct Text: Builtin {
     }
 }
 
+struct BorderStyle {
+    var topLeft = "┌"
+    var topRight = "┐"
+    var horizontal = "─"
+    var vertical = "│"
+    var bottomLeft = "└"
+    var bottomRight = "┘"
+    
+    
+    static let ascii = BorderStyle(topLeft: "+", topRight: "+", horizontal: "-", vertical: "|", bottomLeft: "+", bottomRight: "+")
+}
+
 struct Border<Content: Builtin>: Builtin {
     var content: Content
+    var style = BorderStyle()
     let width: Int = 1
     
     func size(for proposed: Size) -> Size {
@@ -56,9 +69,9 @@ struct Border<Content: Builtin>: Builtin {
     
     func render(origin: Point, size: Size) {
         move(to: origin)
-        let line = "+" + String(repeating: "-", count: size.width-2) + "+"
-        _write(line)
-        let vertical = "|" + String(repeating: " ", count: size.width-2) + "|"
+        let topLine = style.topLeft + String(repeating: style.horizontal, count: size.width-2) + style.topRight
+        _write(topLine)
+        let vertical = style.vertical + String(repeating: " ", count: size.width-2) + style.vertical
         for v in 1...size.height-2 {
             var p = origin
             p.y += v
@@ -76,7 +89,8 @@ struct Border<Content: Builtin>: Builtin {
         pos.x = origin.x
         pos.y = origin.y + size.height-1
         move(to: pos)
-        _write(line)
+        let bottomLine = style.bottomLeft + String(repeating: style.horizontal, count: size.width-2) + style.bottomRight
+        _write(bottomLine)
     }
 }
 
@@ -107,12 +121,12 @@ struct Padding<Content: Builtin>: Builtin {
 }
 
 extension Builtin {
-    func padding(amount: Int = 1) -> some Builtin {
+    func padding(_ amount: Int = 1) -> some Builtin {
         Padding(content: self, amount: amount)
     }
     
-    func border() -> some Builtin {
-        Border(content: self)
+    func border(style: BorderStyle = .init()) -> some Builtin {
+        Border(content: self, style: style)
     }
     
     func frame(width: Int? = nil, height: Int? = nil) -> some Builtin {
