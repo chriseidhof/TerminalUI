@@ -12,4 +12,5 @@ Similar Projects:
 Inspiration:
 
 - https://github.com/aristocratos/bashtop
+- https://github.com/rothgar/awesome-tuis
 - ...
