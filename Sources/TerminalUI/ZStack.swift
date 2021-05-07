@@ -36,7 +36,6 @@ public struct ZStack: BuiltinView {
         layout(proposed: proposed)
         guard let f = rects.first else { return .zero }
         let union = rects.dropFirst().reduce(f, { $0.union($1) })
-        print(union)
         let size = union.size
         layout(proposed: ProposedSize(size))
         return size
