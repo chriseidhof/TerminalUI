@@ -11,7 +11,11 @@ var rootView: some BuiltinView {
         Text("Testing A Longer Text")
             .frame(maxWidth: .max)
             .border()
-            .padding()
+            .padding(),
+        ZStack(alignment: .center, children: [
+            Text("Test").padding().border(),
+            Text("+").backgroundColor(.green)
+        ])
     ], alignment: .bottom)
     .overlay(Text("[x]", color: .red), alignment: .topTrailing)
     .overlay(GeometryReader(alignment: .bottom) { size in

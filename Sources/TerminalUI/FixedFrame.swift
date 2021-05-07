@@ -26,26 +26,15 @@ struct FixedFrame<Content: BuiltinView>: BuiltinView {
 }
 
 extension BuiltinView {
-    func translation<V: BuiltinView>(for childView: V, in parentSize: Size, childSize: Size, alignment: Alignment) -> Point {
+    func translation(for childView: BuiltinView, in parentSize: Size, childSize: Size, alignment: Alignment) -> Point {
         let parentPoint = alignment.point(for: parentSize)
         let childPoint = alignment.point(for: childSize)
-//        if let customX  = childView.customAlignment(for: alignment.horizontal, in: childSize) {
-//            childPoint.x = customX
-//        }
-//        // TODO vertical axis
         return Point(x: parentPoint.x-childPoint.x, y: parentPoint.y-childPoint.y)
     }
     
     func translation<V: BuiltinView>(for sibling: V, in size: Size, siblingSize: Size, alignment: Alignment) -> Point {
         let selfPoint = alignment.point(for: size)
-//        if let customX  = self.customAlignment(for: alignment.horizontal, in: size) {
-//            selfPoint.x = customX
-//        }
         let childPoint = alignment.point(for: siblingSize)
-//        if let customX  = sibling.customAlignment(for: alignment.horizontal, in: siblingSize) {
-//            childPoint.x = customX
-//        }
-        // TODO vertical axis
         return Point(x: selfPoint.x-childPoint.x, y: selfPoint.y-childPoint.y)
     }
 }
