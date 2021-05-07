@@ -15,7 +15,7 @@ public protocol BuiltinView {
     func render(context: RenderingContext, size: Size)
 }
 
-public struct ProposedSize {
+public struct ProposedSize: Equatable {
     public var width: Width?
     public var height: Height?
 }
@@ -26,14 +26,14 @@ extension ProposedSize {
     }
 }
 
-public struct Size {
+public struct Size: Equatable {
     public var width: Width
     public var height: Height
      
     public static let zero = Size(width: 0, height: 0)
 }
 
-public struct Point {
+public struct Point: Equatable {
     public var x: Int
     public var y: Int
     

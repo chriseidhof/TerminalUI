@@ -58,7 +58,7 @@ func render() {
     move(to: Point(x: 1, y: 1))
     let implicit = current!
     let s = implicit.size(for: ProposedSize(size))
-    implicit.render(context: RenderingContext(), size: s)
+    implicit.render(context: TTYRenderingContext(), size: s)
     
 }
 

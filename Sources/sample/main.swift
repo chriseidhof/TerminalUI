@@ -8,7 +8,7 @@ var rootView: some BuiltinView {
             .border()
             .padding()            
             .backgroundColor(.red),
-        Text("Testing")
+        Text("Testing A Longer Text")
             .frame(maxWidth: .max)
             .border()
             .padding()

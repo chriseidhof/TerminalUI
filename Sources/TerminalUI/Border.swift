@@ -35,10 +35,10 @@ struct Border: BuiltinView {
         var c = context
         let vertical = style.vertical + String(repeating: " ", count: size.width-2) + style.vertical
         for _ in 1...size.height-2 {
-            c.origin.y += 1
+            c.translateBy(.init(x: 0, y: 1))
             c.write(vertical)
         }
-        c.origin.y += 1
+        c.translateBy(.init(x: 0, y: 1))
         let bottomLine = style.bottomLeft + String(repeating: style.horizontal, count: size.width-2) + style.bottomRight
         c.write(bottomLine)
     }
