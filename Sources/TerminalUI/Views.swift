@@ -48,20 +48,6 @@ extension ProposedSize {
     }
 }
 
-public struct RenderingContext {
-    var origin: Point = .zero
-    
-    mutating func translateBy(_ point: Point) {
-        origin.x += point.x
-        origin.y += point.y
-    }
-    
-    func write<S: StringProtocol>(_ s: S) {
-        move(to: origin)
-        _write(String(s))
-    }
-}
-
 extension BuiltinView {
     public func padding(_ amount: Int = 1) -> some BuiltinView {
         Padding(content: self, amount: amount)

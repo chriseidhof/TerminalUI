@@ -1,7 +1,7 @@
 public struct Text: BuiltinView {
     var string: String
     
-    public init(_ string: String) {
+    public init(_ string: String, color: Color? = nil) {
         self.string = string
     }
     

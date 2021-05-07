@@ -26,6 +26,18 @@ func move(to: Point) {
     _write("\u{1b}[\(to.y+1);\(to.x+1)H")
 }
 
+
+func setColor(foregroundColor: Color?, backgroundColor: Color?) {
+    _write("\u{1b}[0m") // todo this is unnecessarily expensive
+    if let f = foregroundColor {
+        _write("\u{1b}[\(f.foreground)m")
+    } else {
+    }
+    if let b = backgroundColor {
+        _write("\u{1b}[\(b.background)m")
+    }
+}
+
 func _write(_ str: String, fd: Int32 = STDOUT_FILENO) {
     _ = str.withCString { str in
         write(fd, str, strlen(str))
