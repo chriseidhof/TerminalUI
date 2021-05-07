@@ -7,16 +7,18 @@
 
 import Foundation
 
-struct BorderStyle {
-    var topLeft = "┌"
-    var topRight = "┐"
-    var horizontal = "─"
-    var vertical = "│"
-    var bottomLeft = "└"
-    var bottomRight = "┘"
+public struct BorderStyle {
     
+    public var topLeft = "┌"
+    public var topRight = "┐"
+    public var horizontal = "─"
+    public var vertical = "│"
+    public var bottomLeft = "└"
+    public var bottomRight = "┘"
     
-    static let ascii = BorderStyle(topLeft: "+", topRight: "+", horizontal: "-", vertical: "|", bottomLeft: "+", bottomRight: "+")
+    public static let `default` = BorderStyle()
+     
+    public static let ascii = BorderStyle(topLeft: "+", topRight: "+", horizontal: "-", vertical: "|", bottomLeft: "+", bottomRight: "+")
 }
 
 struct Border: BuiltinView {

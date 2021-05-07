@@ -1,7 +1,7 @@
-struct Text: BuiltinView {
+public struct Text: BuiltinView {
     var string: String
     
-    init(_ string: String) {
+    public init(_ string: String) {
         self.string = string
     }
     
@@ -9,7 +9,7 @@ struct Text: BuiltinView {
         string.split(omittingEmptySubsequences: false, whereSeparator: { $0.isNewline })
     }
     
-    func size(for proposed: ProposedSize) -> Size {
+    public func size(for proposed: ProposedSize) -> Size {
         // todo actually fit ourselves?
         let lines = self.lines
         let width = lines.map { $0.count }.max() ?? 0
@@ -17,7 +17,7 @@ struct Text: BuiltinView {
         return Size(width: width, height: height)
     }
     
-    func render(context: RenderingContext, size: Size) {
+    public func render(context: RenderingContext, size: Size) {
         var c = context
         for line in lines {
             c.write(line)

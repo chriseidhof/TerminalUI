@@ -15,13 +15,19 @@ final class LayoutState<A> {
     }
 }
 
-struct HStack: BuiltinView {
+public struct HStack: BuiltinView {    
     var children: [BuiltinView]
     var alignment: VerticalAlignment = .center
     let spacing: Width? = 0
     @LayoutState var sizes: [Size] = []
     
-    func render(context: RenderingContext, size: Size) {
+    public init(children: [BuiltinView], alignment: VerticalAlignment = .center) {
+        self.children = children
+        self.alignment = alignment
+    }
+
+    
+    public func render(context: RenderingContext, size: Size) {
         let stackY = alignment.alignmentID.defaultValue(in: size)
         var currentX: Width = 0
         for idx in children.indices {
@@ -35,7 +41,7 @@ struct HStack: BuiltinView {
         }
     }
     
-    func size(for proposed: ProposedSize) -> Size {
+    public func size(for proposed: ProposedSize) -> Size {
         layout(proposed: proposed)
         let width: Width = sizes.reduce(0) { $0 + $1.width }
         let height: Height = sizes.reduce(0) { max($0, $1.height) }

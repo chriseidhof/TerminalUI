@@ -1,5 +1,5 @@
 import XCTest
-@testable import terminal_ui
+@testable import TerminalUI
 
 final class terminal_uiTests: XCTestCase {
     func testExample() {

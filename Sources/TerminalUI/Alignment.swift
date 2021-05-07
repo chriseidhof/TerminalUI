@@ -1,24 +1,24 @@
-struct Alignment {
-    var horizontal: HorizontalAlignment
-    var vertical: VerticalAlignment
+public struct Alignment {
+    public var horizontal: HorizontalAlignment
+    public var vertical: VerticalAlignment
 
-    static let center = Self(horizontal: .center, vertical: .center)
-    static let leading = Self(horizontal: .leading, vertical: .center)
-    static let trailing = Self(horizontal: .trailing, vertical: .center)
-    static let top = Self(horizontal: .center , vertical: .top)
-    static let topLeading = Self(horizontal: .leading, vertical: .top)
-    static let topTrailing = Self(horizontal: .trailing, vertical: .top)
-    static let bottom = Self(horizontal: .center , vertical: .bottom)
-    static let bottomLeading = Self(horizontal: .leading, vertical: .bottom)
-    static let bottomTrailing = Self(horizontal: .trailing, vertical: .bottom)
+    public static let center = Self(horizontal: .center, vertical: .center)
+    public static let leading = Self(horizontal: .leading, vertical: .center)
+    public static let trailing = Self(horizontal: .trailing, vertical: .center)
+    public static let top = Self(horizontal: .center , vertical: .top)
+    public static let topLeading = Self(horizontal: .leading, vertical: .top)
+    public static let topTrailing = Self(horizontal: .trailing, vertical: .top)
+    public static let bottom = Self(horizontal: .center , vertical: .bottom)
+    public static let bottomLeading = Self(horizontal: .leading, vertical: .bottom)
+    public static let bottomTrailing = Self(horizontal: .trailing, vertical: .bottom)
 }
 
-struct HorizontalAlignment {
-    var alignmentID:  AlignmentID.Type
-    var builtin: Bool
-    static let leading = Self(alignmentID: HLeading.self, builtin: true)
-    static let center = Self(alignmentID: HCenter.self, builtin: true)
-    static let trailing = Self(alignmentID: HTrailing.self, builtin: true)
+public struct HorizontalAlignment {
+    public var alignmentID:  AlignmentID.Type
+    public var builtin: Bool
+    public static let leading = Self(alignmentID: HLeading.self, builtin: true)
+    public static let center = Self(alignmentID: HCenter.self, builtin: true)
+    public static let trailing = Self(alignmentID: HTrailing.self, builtin: true)
 }
 
 // We don't allow custom alignments for now
@@ -34,16 +34,16 @@ extension VerticalAlignment {
     }
 }
 
-struct VerticalAlignment {
-    var alignmentID:  AlignmentID.Type
-    var builtin: Bool
-    
-    static let top = Self(alignmentID: VTop.self, builtin: true)
-    static let center = Self(alignmentID: VCenter.self, builtin: true)
-    static let bottom = Self(alignmentID: VBottom.self, builtin: true)
+public struct VerticalAlignment {
+    public var alignmentID:  AlignmentID.Type
+    public var builtin: Bool
+     
+    public static let top = Self(alignmentID: VTop.self, builtin: true)
+    public static let center = Self(alignmentID: VCenter.self, builtin: true)
+    public static let bottom = Self(alignmentID: VBottom.self, builtin: true)
 }
 
-protocol AlignmentID {
+public protocol AlignmentID {
     static func defaultValue(in context: Size) -> Int
 }
 
@@ -76,7 +76,7 @@ enum HTrailing: AlignmentID {
 }
 
 extension Alignment {
-    func point(for size: Size) -> Point {
+    public func point(for size: Size) -> Point {
         let x = horizontal.alignmentID.defaultValue(in: size)
         let y = vertical.alignmentID.defaultValue(in: size)
         return Point(x: x, y: y)

@@ -55,7 +55,7 @@ struct FlexibleFrame<Content: BuiltinView>: BuiltinView {
 }
 
 extension BuiltinView {
-    func frame(minWidth: Width? = nil, idealWidth: Width? = nil, maxWidth: Width? = nil, minHeight: Height? = nil, idealHeight: Height? = nil, maxHeight: Height? = nil, alignment: Alignment = .center) -> some BuiltinView {
+    public func frame(minWidth: Width? = nil, idealWidth: Width? = nil, maxWidth: Width? = nil, minHeight: Height? = nil, idealHeight: Height? = nil, maxHeight: Height? = nil, alignment: Alignment = .center) -> some BuiltinView {
         FlexibleFrame(minWidth: minWidth, idealWidth: idealWidth, maxWidth: maxWidth, minHeight: minHeight, idealHeight: idealHeight, maxHeight: maxHeight, alignment: alignment, content: self)
     }
 }

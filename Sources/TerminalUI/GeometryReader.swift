@@ -1,8 +1,13 @@
-struct GeometryReader<Content: BuiltinView>: BuiltinView {
+public struct GeometryReader<Content: BuiltinView>: BuiltinView {
+    public init(alignment: Alignment = Alignment.topLeading, content: @escaping (Size) -> Content) {
+        self.alignment = alignment
+        self.content = content
+    }
+    
     var alignment = Alignment.topLeading
     let content: (Size) -> Content
     
-    func render(context: RenderingContext, size: Size) {
+    public func render(context: RenderingContext, size: Size) {
         let child = content(size)
         let childSize = child.size(for: ProposedSize(size))
         let parentPoint = alignment.point(for: size)
@@ -12,7 +17,7 @@ struct GeometryReader<Content: BuiltinView>: BuiltinView {
         child.render(context: c, size: childSize)
     }
     
-    func size(for proposed: ProposedSize) -> Size {
+    public func size(for proposed: ProposedSize) -> Size {
         return proposed.orDefault
     }
 }

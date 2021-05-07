@@ -39,11 +39,11 @@ struct Background<Content: BuiltinView, O: BuiltinView>: BuiltinView {
 }
 
 extension BuiltinView {
-    func overlay<O: BuiltinView>(_ other: O, alignment: Alignment = .center) -> some BuiltinView {
+    public func overlay<O: BuiltinView>(_ other: O, alignment: Alignment = .center) -> some BuiltinView {
         Overlay(content: self, overlay: other, alignment: alignment)
     }
     
-    func background<O: BuiltinView>(_ other: O, alignment: Alignment = .center) -> some BuiltinView {
+    public func background<O: BuiltinView>(_ other: O, alignment: Alignment = .center) -> some BuiltinView {
         Background(content: self, background: other, alignment: alignment)
     }
 }
