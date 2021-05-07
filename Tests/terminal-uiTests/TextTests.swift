@@ -56,4 +56,11 @@ final class TextTests: XCTestCase {
         t.render(context: context, size: size)
         XCTAssertEqual(context.log, "write Hello\n")
     }
+    
+    func testLineTruncation2() {
+        let t = Text("Hello\nWorld")
+        let size = t.size(for: ProposedSize(width: 5, height: 1))
+        t.render(context: context, size: size)
+        XCTAssertEqual(context.log, "write Hell…\n")
+    }
 }

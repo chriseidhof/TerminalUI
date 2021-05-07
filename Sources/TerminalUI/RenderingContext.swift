@@ -15,6 +15,7 @@ public struct TTYRenderingContext: RenderingContext {
     }
 }
 
+// Concrete implementations have to have value semantics: it should be possible to make a copy by doing `var c = previousContext` and `c` and `previousContext` should be separate instances. In other words, conforming types need to be a struct.
 public protocol RenderingContext {
     var foregroundColor: Color? { get set }
     var backgroundColor: Color? { get set }

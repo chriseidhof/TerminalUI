@@ -15,7 +15,8 @@ var rootView: some BuiltinView {
         ZStack(alignment: .center, children: [
             Text("Test").padding().border(),
             Text("+").backgroundColor(.green)
-        ])
+        ]),
+        Text(["This", "is", "a", "truncation", "test"].joined(separator: "\n")) // todo: fix this crash
     ], alignment: .bottom)
     .overlay(Text("[x]", color: .red), alignment: .topTrailing)
     .overlay(GeometryReader(alignment: .bottom) { size in

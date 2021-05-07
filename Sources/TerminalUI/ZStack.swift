@@ -20,7 +20,6 @@ public struct ZStack: BuiltinView {
         let minX = actualRects.map { $0.minX }.min() ?? 0
         let maxY = actualRects.map { $0.maxY }.max() ?? size.height
         var c = context
-//        context.saveGState()
         c.translateBy(Point(x: -minX, y: size.height-maxY))
         for i in children.indices {
             let child = children[i]
@@ -28,7 +27,6 @@ public struct ZStack: BuiltinView {
             childC.translateBy(Point(x: actualRects[i].origin.x, y: actualRects[i].origin.y))
             child.render(context: childC, size: rects[i].size)
         }
-//        context.restoreGState()
     }
     
     

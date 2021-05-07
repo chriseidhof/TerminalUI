@@ -18,13 +18,20 @@ public struct Text: BuiltinView {
     }
     
     public func render(context: RenderingContext, size: Size) {
-        let l = self.lines.prefix(size.height)
-        guard let first = l.first else { return }
+        let l = lines
+        guard !l.isEmpty, size.height > 0 else { return }
         var c = context
-        c.write(first.truncate(to: size.width))
-        for line in lines.dropFirst() {
-            c.translateBy(.init(x: 0, y: 1))
-            c.write(line.truncate(to: size.width))
+        for i in 0..<min(size.height, l.endIndex) {
+            if i > 0 {
+                c.translateBy(.init(x: 0, y: 1))
+            }
+            let line = lines[i]
+            let lastLineBeforeVerticalTruncation = i + 1 == size.height && i + 1 < l.endIndex
+            if lastLineBeforeVerticalTruncation {
+                c.write(line.truncate(to: size.width).dropLast() + "…")
+            } else {
+                c.write(line.truncate(to: size.width))
+            }
         }
     }    
 }
