@@ -27,10 +27,15 @@ public struct Text: BuiltinView {
             }
             let line = lines[i]
             let lastLineBeforeVerticalTruncation = i + 1 == size.height && i + 1 < l.endIndex
+            let truncated = line.truncate(to: size.width)
             if lastLineBeforeVerticalTruncation {
-                c.write(line.truncate(to: size.width).dropLast() + "…")
+                if truncated.count >= size.width {
+                    c.write(truncated.dropLast() + "…")
+                } else {
+                    c.write(truncated + "…")
+                }
             } else {
-                c.write(line.truncate(to: size.width))
+                c.write(truncated)
             }
         }
     }    

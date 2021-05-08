@@ -63,4 +63,11 @@ final class TextTests: XCTestCase {
         t.render(context: context, size: size)
         XCTAssertEqual(context.log, "write Hell…\n")
     }
+    
+    func testLineTruncation3() {
+        let t = Text("This is a truncation test".split(separator: " ").joined(separator: "\n"))
+        let size = t.size(for: ProposedSize(width: 20, height: 1))
+        t.render(context: context, size: size)
+        XCTAssertEqual(context.log, "write This…\n")
+    }
 }
