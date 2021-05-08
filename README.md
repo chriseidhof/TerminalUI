@@ -20,7 +20,8 @@ Implementation Status
   - [x] Background
   - [x] ZStack
   - [x] Text
-  - [ ] Padding (In progress)
+  - [x] Padding (In progress)
+    - [ ] Add tests
   - [ ] Custom Alignment Guides
   - [ ] Layout Priorities  
   - [ ] VStack

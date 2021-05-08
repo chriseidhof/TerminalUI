@@ -44,6 +44,27 @@ extension ProposedSize {
     }
 }
 
+public struct EdgeInsets: Equatable {
+    public init(leading: Width, trailing: Width, top: Height, bottom: Height) {
+        self.leading = leading
+        self.trailing = trailing
+        self.top = top
+        self.bottom = bottom
+    }
+    
+    public init(value: Width) {
+        self.leading = value
+        self.trailing = value
+        self.top = value
+        self.bottom = value
+    }
+    
+    public var leading: Width
+    public var trailing: Width
+    public var top: Height
+    public var bottom: Height
+}
+
 extension Rect {
     var minX: Int {
         size.width > 0 ? origin.x : origin.x - size.width

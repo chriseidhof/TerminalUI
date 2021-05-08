@@ -15,7 +15,11 @@ public protocol BuiltinView {
 
 extension BuiltinView {
     public func padding(_ amount: Int = 1) -> some BuiltinView {
-        Padding(content: self, amount: amount)
+        Padding(content: self, insets: EdgeInsets(value: amount))
+    }
+    
+    public func padding(_ insets: EdgeInsets) -> some BuiltinView {
+        Padding(content: self, insets: insets)
     }
     
     public func border(style: BorderStyle = .default) -> some BuiltinView {
