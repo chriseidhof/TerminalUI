@@ -22,11 +22,11 @@ Implementation Status
   - [x] Text
   - [x] Padding (In progress)
     - [ ] Add tests
-  - [ ] Custom Alignment Guides
-  - [ ] Layout Priorities  
   - [ ] VStack
   - [ ] List
   - [ ] Button
+  - [ ] Custom Alignment Guides
+  - [ ] Layout Priorities  
   - More ideas (lower priority)
     - [ ] Tree View (similar to outlines)
     - [ ] Menus
