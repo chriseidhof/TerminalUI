@@ -22,14 +22,17 @@ Implementation Status
   - [x] Text
   - [x] Padding (In progress)
     - [ ] Add tests
+  - [ ] Progress
   - [ ] VStack
   - [ ] List
   - [ ] Button
+  - [ ] Switch
   - [ ] Custom Alignment Guides
   - [ ] Layout Priorities  
   - More ideas (lower priority)
     - [ ] Tree View (similar to outlines)
     - [ ] Menus
+    - [ ] Navigation? (Not sure if this is a good idea, but could be fun to try)
 - State/Lifecycle/Interactivity
   - [ ] Custom `View` structures (I think we can build this on top of `BuiltinView`)
   - [ ] Environment (should be easy)
