@@ -5,8 +5,6 @@
 //  Created by Chris Eidhof on 06.05.21.
 //
 
-import SwiftUI
-
 @propertyWrapper
 final class LayoutState<A> {
     var wrappedValue: A

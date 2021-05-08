@@ -5,8 +5,6 @@
 //  Created by Chris Eidhof on 06.05.21.
 //
 
-import Foundation
-
 public typealias Width = Int
 public typealias Height = Int
 

@@ -5,8 +5,6 @@
 //  Created by Chris Eidhof on 07.05.21.
 //
 
-import Foundation
-
 public struct ProposedSize: Equatable {
     public var width: Width?
     public var height: Height?

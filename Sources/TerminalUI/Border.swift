@@ -5,8 +5,6 @@
 //  Created by Chris Eidhof on 06.05.21.
 //
 
-import Foundation
-
 public struct BorderStyle {
     
     public var topLeft = "┌"
