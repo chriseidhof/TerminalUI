@@ -1,6 +1,6 @@
 import TerminalUI
 
-var rootView: some BuiltinView {
+var horizontal: some BuiltinView {
     HStack(children: [
         Text("Hello")
             .padding()
@@ -25,6 +25,19 @@ var rootView: some BuiltinView {
     .border()
 }
 
+func rootView(_ char: Int32?) -> some BuiltinView {
+    var alignment: HorizontalAlignment = .center
+    if char == 108 { alignment = .leading }
+    if char == 114 { alignment = .trailing }
+    return VStack(alignment: alignment, children: [
+        Text("Hello"),
+        Text("\(char ?? 0)"),
+        Text("Sunny World")
+            .border(style: .ascii)
+        
+    ]).padding()
+    .border()
+}
 
 
 run(rootView)
