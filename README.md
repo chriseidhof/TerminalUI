@@ -22,8 +22,8 @@ Implementation Status
   - [x] Text
   - [x] Padding (In progress)
     - [ ] Add tests
+  - [x] VStack
   - [ ] Progress
-  - [ ] VStack
   - [ ] ScrollView
   - [ ] List
   - [ ] Button
