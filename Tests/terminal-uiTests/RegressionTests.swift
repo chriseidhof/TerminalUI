@@ -11,6 +11,7 @@ final class RegressionTests: XCTestCase {
                 .border()
         }
         let size = sample.size(for: ProposedSize(width: 20, height: 5))
-        let rendered = sample.render(context: TestContext(), size: size)
+        sample.render(context: TestContext(), size: size)
+        // this used to crash.
     }
 }

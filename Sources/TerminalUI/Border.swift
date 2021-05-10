@@ -28,6 +28,7 @@ struct Border: BuiltinView {
     }
     
     func render(context: RenderingContext, size: Size) {
+        guard size.width > 1, size.height > 1 else { return }
         let topLine = style.topLeft + String(repeating: style.horizontal, count: size.width-2) + style.topRight
         context.write(topLine)
         var c = context

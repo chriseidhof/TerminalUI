@@ -27,14 +27,14 @@ public struct Point: Equatable {
     public var x: Int
     public var y: Int
     
-    static let zero = Point(x: 0, y: 0)
+    static public let zero = Point(x: 0, y: 0)
 }
 
 public struct Rect: Equatable {
     public var origin: Point
     public var size: Size
     
-    static let zero = Rect(origin: .zero, size: .zero)
+    static public let zero = Rect(origin: .zero, size: .zero)
 }
 
 extension ProposedSize {
@@ -66,27 +66,27 @@ public struct EdgeInsets: Equatable {
 }
 
 extension Rect {
-    var minX: Int {
+    public var minX: Int {
         size.width > 0 ? origin.x : origin.x - size.width
     }
     
-    var minY: Int {
+    public var minY: Int {
         size.height > 0 ? origin.y : origin.y - size.height
     }
     
-    var maxX: Int {
+    public var maxX: Int {
         origin.x + size.width
     }
     
-    var maxY: Int {
+    public var maxY: Int {
         origin.y + size.height
     }
     
-    var standardized: Rect {
+    public var standardized: Rect {
         self // todo
     }
     
-    func union(_ other: Rect) -> Rect {
+    public func union(_ other: Rect) -> Rect {
         let s = standardized
         let o = other.standardized
         let minX = min(s.minX, o.minX)

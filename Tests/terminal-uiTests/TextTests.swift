@@ -1,33 +1,6 @@
 import XCTest
 @testable import TerminalUI
 
-class TestContext: RenderingContext {
-    var log: String = ""
-    
-    var foregroundColor: Color? {
-        didSet {
-            print("Set foreground color \(String(describing: foregroundColor))", to: &log)
-        }
-    }
-    
-    var backgroundColor: Color? {
-        didSet {
-            print("Set background color \(String(describing: foregroundColor))", to: &log)
-        }
-    }
-    
-    func translateBy(_ point: Point) {
-        print("translateBy \(point)", to: &log)
-
-    }
-    
-    func write<S>(_ s: S) where S : StringProtocol {
-        print("write \(String(s))", to: &log)
-    }
-    
-    
-}
-
 final class TextTests: XCTestCase {
     var context = TestContext()
     

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Chris Eidhof on 06.05.21.
-//
-
 @propertyWrapper
 final class LayoutState<A> {
     var wrappedValue: A
@@ -12,6 +5,25 @@ final class LayoutState<A> {
         self.wrappedValue = wrappedValue
     }
 }
+
+struct LayoutInfo: Comparable {
+    var min: Width
+    var max: Height
+    var idx: Int
+    var priority: Double
+    
+    static func <(_ l: LayoutInfo, _ r: LayoutInfo) -> Bool {
+        if l.priority > r.priority { return true }
+        if r.priority > l.priority { return false }
+        return l.flexibility < r.flexibility
+    }
+    
+    var flexibility: Int {
+        max - min
+    }
+}
+
+// TODO: this is duplicated between HStack and here, except for the axis. We should abstract away that code?
 
 public struct HStack: BuiltinView {    
     var children: [BuiltinView]
@@ -51,16 +63,16 @@ public struct HStack: BuiltinView {
             let child = children[idx]
             let lower = child.size(for: ProposedSize(width: 0, height: proposed.height)).width
             let upper = child.size(for: ProposedSize(width: .max, height: proposed.height)).width
-            return LayoutInfo(minWidth: lower, maxWidth: upper, idx: idx, priority: 1)
+            return LayoutInfo(min: lower, max: upper, idx: idx, priority: 1)
         }.sorted()
         var groups = flexibility.group(by: \.priority)
         var sizes: [Size] = Array(repeating: .zero, count: children.count)
-        let allMinWidths = flexibility.map(\.minWidth).reduce(0,+)
+        let allMinWidths = flexibility.map(\.min).reduce(0,+)
         var remainingWidth = proposed.width! - allMinWidths // TODO force unwrap
         
         while !groups.isEmpty {
             let group = groups.removeFirst()
-            remainingWidth += group.map(\.minWidth).reduce(0,+)
+            remainingWidth += group.map(\.min).reduce(0,+)
             
             var remainingIndices = group.map { $0.idx }
             while !remainingIndices.isEmpty {
@@ -76,23 +88,3 @@ public struct HStack: BuiltinView {
         self.sizes = sizes
     }
 }
-
-struct LayoutInfo: Comparable {
-    var minWidth: Width
-    var maxWidth: Height
-    var idx: Int
-    var priority: Double
-    
-    static func <(_ l: LayoutInfo, _ r: LayoutInfo) -> Bool {
-        if l.priority > r.priority { return true }
-        if r.priority > l.priority { return false }
-        return l.flexibility < r.flexibility
-    }
-    
-    var flexibility: Int {
-        maxWidth - minWidth
-    }
-}
-
-
-
