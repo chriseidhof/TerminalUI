@@ -19,7 +19,7 @@ public struct BorderStyle {
     public static let ascii = BorderStyle(topLeft: "+", topRight: "+", horizontal: "-", vertical: "|", bottomLeft: "+", bottomRight: "+")
 }
 
-struct Border: BuiltinView {
+struct Border: BuiltinView, View {
     var style = BorderStyle()
     let width = 1
     

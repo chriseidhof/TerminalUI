@@ -29,7 +29,7 @@ extension Color {
     }
 }
 
-struct ModifyContext<Content: BuiltinView>: BuiltinView {
+struct ModifyContext<Content: View>: BuiltinView, View {
     var content: Content
     var modify: (inout RenderingContext) -> ()
     
@@ -45,14 +45,14 @@ struct ModifyContext<Content: BuiltinView>: BuiltinView {
 
 }
 
-extension BuiltinView {
-    public func foregroundColor(_ color: Color? = nil) -> some BuiltinView {
+extension View {
+    public func foregroundColor(_ color: Color? = nil) -> some View {
         ModifyContext(content: self, modify: { c in
             c.foregroundColor = color
         })
     }
     
-    public func backgroundColor(_ color: Color? = nil) -> some BuiltinView {
+    public func backgroundColor(_ color: Color? = nil) -> some View {
         ModifyContext(content: self, modify: { c in
             c.backgroundColor = color
         })

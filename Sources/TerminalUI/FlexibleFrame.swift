@@ -5,7 +5,7 @@
 //  Created by Chris Eidhof on 06.05.21.
 //
 
-struct FlexibleFrame<Content: BuiltinView>: BuiltinView {
+struct FlexibleFrame<Content: View>: View {
     var minWidth: Width?
     var idealWidth: Width?
     var maxWidth: Width?
@@ -54,8 +54,8 @@ struct FlexibleFrame<Content: BuiltinView>: BuiltinView {
     }
 }
 
-extension BuiltinView {
-    public func frame(minWidth: Width? = nil, idealWidth: Width? = nil, maxWidth: Width? = nil, minHeight: Height? = nil, idealHeight: Height? = nil, maxHeight: Height? = nil, alignment: Alignment = .center) -> some BuiltinView {
+extension View {
+    public func frame(minWidth: Width? = nil, idealWidth: Width? = nil, maxWidth: Width? = nil, minHeight: Height? = nil, idealHeight: Height? = nil, maxHeight: Height? = nil, alignment: Alignment = .center) -> some View {
         FlexibleFrame(minWidth: minWidth, idealWidth: idealWidth, maxWidth: maxWidth, minHeight: minHeight, idealHeight: idealHeight, maxHeight: maxHeight, alignment: alignment, content: self)
     }
 }

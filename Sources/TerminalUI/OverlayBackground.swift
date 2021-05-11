@@ -1,5 +1,5 @@
 
-struct Overlay<Content: BuiltinView, O: BuiltinView>: BuiltinView {
+struct Overlay<Content: View, O: View>: View, BuiltinView {
     let content: Content
     let overlay: O
     let alignment: Alignment
@@ -18,7 +18,7 @@ struct Overlay<Content: BuiltinView, O: BuiltinView>: BuiltinView {
     }
 }
 
-struct Background<Content: BuiltinView, O: BuiltinView>: BuiltinView {
+struct Background<Content: View, O: View>: View, BuiltinView {
     let content: Content
     let background: O
     let alignment: Alignment
@@ -38,12 +38,12 @@ struct Background<Content: BuiltinView, O: BuiltinView>: BuiltinView {
     }
 }
 
-extension BuiltinView {
-    public func overlay<O: BuiltinView>(_ other: O, alignment: Alignment = .center) -> some BuiltinView {
+extension View {
+    public func overlay<O: View>(_ other: O, alignment: Alignment = .center) -> some View {
         Overlay(content: self, overlay: other, alignment: alignment)
     }
     
-    public func background<O: BuiltinView>(_ other: O, alignment: Alignment = .center) -> some BuiltinView {
+    public func background<O: View>(_ other: O, alignment: Alignment = .center) -> some View {
         Background(content: self, background: other, alignment: alignment)
     }
 }

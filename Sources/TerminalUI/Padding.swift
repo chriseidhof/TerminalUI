@@ -5,7 +5,7 @@
 //  Created by Chris Eidhof on 06.05.21.
 //
 
-struct Padding<Content: BuiltinView>: BuiltinView {
+struct Padding<Content: View>: View {
     var content: Content
     var insets: EdgeInsets = EdgeInsets(value: 1)
     

@@ -5,7 +5,7 @@
 //  Created by Chris Eidhof on 06.05.21.
 //
 
-struct FixedFrame<Content: BuiltinView>: BuiltinView {
+struct FixedFrame<Content: View>: View {
     var width: Width?
     var height: Width?
     var alignment: Alignment

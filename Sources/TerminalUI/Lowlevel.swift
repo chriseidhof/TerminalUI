@@ -62,7 +62,7 @@ public func render(char: Int32?) {
     
 }
 
-public func run<V: BuiltinView>(_ rootView: @escaping (Int32?) -> V) {
+public func run<V: View>(_ rootView: @escaping (Int32?) -> V) {
     current = { c in rootView(c).frame(maxWidth: .max, maxHeight: .max) }
     _ = enableRawMode(file: STDOUT_FILENO)
     render(char: nil)

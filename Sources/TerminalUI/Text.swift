@@ -1,4 +1,4 @@
-public struct Text: BuiltinView {
+public struct Text: View, BuiltinView {
     var string: String
     
     public init(_ string: String, color: Color? = nil) {

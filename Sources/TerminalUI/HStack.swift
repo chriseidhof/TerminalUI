@@ -25,7 +25,7 @@ struct LayoutInfo: Comparable {
 
 // TODO: this is duplicated between HStack and here, except for the axis. We should abstract away that code?
 
-public struct HStack: BuiltinView {    
+public struct HStack: BuiltinView, View {    
     var children: [BuiltinView]
     var alignment: VerticalAlignment = .center
     let spacing: Width? = 0

@@ -1,4 +1,4 @@
-public struct GeometryReader<Content: BuiltinView>: BuiltinView {
+public struct GeometryReader<Content: View>: BuiltinView, View {
     public init(alignment: Alignment = Alignment.topLeading, content: @escaping (Size) -> Content) {
         self.alignment = alignment
         self.content = content

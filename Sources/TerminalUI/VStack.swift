@@ -1,6 +1,6 @@
 // TODO: this is duplicated between HStack and here, except for the axis. We should abstract away that code?
 
-public struct VStack: BuiltinView {
+public struct VStack: BuiltinView, View {
     var children: [BuiltinView]
     var alignment: HorizontalAlignment = .center
     let spacing: Height? = 0
